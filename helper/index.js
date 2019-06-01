@@ -12,3 +12,7 @@ inter.getRandomArr = (len = 10, max = 100) => {
 
     return arr;
 }
+
+inter.swap = (arr, x, y) => {
+    [arr[x], arr[y]] = [arr[y], arr[x]]
+}

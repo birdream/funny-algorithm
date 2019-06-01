@@ -1,4 +1,4 @@
-const { getRandomArr } = require('../helper');
+const { getRandomArr, swap } = require('../helper');
 
 class Heap {
     constructor(input = []) {
@@ -9,90 +9,80 @@ class Heap {
         console.timeEnd('build heap');
     }
 
-    // parent(i) = floor((i - 1)/2)
-    // left(i)   = 2i + 1
-    // right(i)  = 2i + 2
-    _buildHeap() {
-        const len = this.heap.length;
-        for (let i = 0; i < len; i++) {
-            const parentIdx = this._getParentIdx(i)
-            if (parentIdx < 0) { continue; }
-            this._switchPar({ parentIdx, newIdx: i - 1 })
+    // compare the (non-leap node)'s left and right and itself
+    // switch the index between the biggest one and the small one and stop
+    _heapify(i, len = this.heap.length) {
+        const a = this.heap;
+
+        while(true) {
+            let maxPos = i;
+            if (2*i+1 <= len && a[i] < a[2*i+1]) maxPos = 2*i+1
+            if (2*i+2 <= len && a[maxPos] < a[2*i+2]) maxPos = 2*i+2
+            if (i === maxPos) break
+
+            swap(a, i, maxPos);
+            i = maxPos;
         }
+    }
+
+    // get the last first (non-leap node) parent the _heapify
+    // and loop the second (non-leap node) untill the top father node
+    _buildHeap() {
+        // let i = this._getParentIdx(this.heap.length - 1);
+        for (let i = this._getParentIdx(this.heap.length - 1); i >= 0; i--) {
+            this._heapify(i)
+        }
+
         return this.heap
     }
 
     _getParentIdx(i) {
-        const j = Math.floor((i - 1)/2)
-
-        return j >= 0 ? j : -1
+        return Math.floor((i - 1)/2)
     }
 
-    _switchPar({ parentIdx, newIdx }) {
+    // add one and using it to it father to heap
+    add(val) {
         const a = this.heap;
+        let newIdx = a.push(val) - 1;
 
-        if (parentIdx < 0 || a[newIdx] <= a[parentIdx]) { return }
-
-        [a[parentIdx], a[newIdx]] = [a[newIdx], a[parentIdx]]
-
-        this._switchPar({
-            parentIdx: this._getParentIdx(parentIdx),
-            newIdx: parentIdx
-        })
-    }
-
-    _getLeftIdx(i) {
-        const j = 2 * i + 1
-
-        return j <= this.heap.length - 1 ? j : null
-    }
-
-    _getRightIdx(i) {
-        const j = 2 * i + 2
-
-        return j <= this.heap.length - 1 ? j : null
-    }
-
-    push(val) {
-        const newIdx = this.heap.push(val) - 1;
-
-        this._switchPar({
-            parentIdx: this._getParentIdx(newIdx),
-            newIdx
-        });
-
-        return this;
-    }
-
-    remove(idx) {
-        const a = this.heap;
-        const lastIdx = a.length - 1;
-        if (idx > lastIdx) { return; }
-
-        if (lastIdx === idx) {
-            a.splice(idx, 1);
-            return;
+        while(this._getParentIdx(newIdx) >= 0 && a[newIdx] > a[this._getParentIdx(newIdx)]) {
+            swap(a, newIdx, this._getParentIdx(newIdx));
+            newIdx = this._getParentIdx(newIdx);
         }
 
-        delete a[idx];
-
-        const leftChildIdx = this._getLeftIdx(idx);
-        const rightChildIdx = this._getRightIdx(idx);
-        if (!leftChildIdx || !rightChildIdx) { return; }
-
-        [a[idx], a[lastIdx]] = [a[lastIdx], a[idx]];
-        a.pop();
-        // for (let i = 0; i < len; i++) {
-        //     const parentIdx = this._getParentIdx(i)
-        //     if (parentIdx < 0) { continue; }
-        //     this._switchPar({ parentIdx, newIdx: i - 1 })
-        // }
-
-
+        return this;
     }
 
-    sort() {
+    remove0() {
+        const a = this.heap;
+        const lastIdx = a.length - 1;
+        [a[0], a[lastIdx]] = [a[lastIdx], a[0]];
+        a.pop();
+
+        this._heapify(0);
+
         return this;
+    }
+
+    // every time switch the first element to the last one and re-heap for the whole arr except the last one.
+    // so k is the last index of the whole arr and -1 every time
+    // because the last one is the originall max one
+    sort() {
+        let k = this.heap.length - 1;
+        console.time('sort')
+        while(k > 0) {
+            swap(this.heap, k, 0);
+            // k -= 1;
+            this._heapify(0, --k);
+        }
+        console.timeEnd('sort');
+
+        return this;
+    }
+
+    // TODO: add the verify method to make sure every leap node is less than father in the heap;
+    verify() {
+
     }
 
     print() {
@@ -101,10 +91,15 @@ class Heap {
 }
 
 ;(() => {
-    const input = getRandomArr(10, 100);
-    // console.time('sort')
-    // input.sort();
-    // console.timeEnd('sort')
+    const input = getRandomArr(50, 100);
     const heap = new Heap(input);
     heap.print();
+    heap.add(50).print();
+    heap.add(98).print();
+    heap.add(100).print();
+    heap.add(101).print();
+    heap.add(150).print();
+    heap.add(101).print();
+    // heap.remove0().print();
+    heap.sort().print();
 })()
