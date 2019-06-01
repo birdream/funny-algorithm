@@ -27,7 +27,10 @@ const { getRandomArr, it } = require('../../helper');
         samllHeap.sort().print();
     });
 
-    it('get middle number example', () => {
+    // TODO using the heap to get the median from dynamic data
+    it('get Median example', () => {
+        const input = getRandomArr(20, 100).sort(((x ,y) => x - y));
+
 
     })
 })()
