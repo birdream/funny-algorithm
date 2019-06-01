@@ -16,8 +16,8 @@ class Heap {
 
         while(true) {
             let maxPos = i;
-            if (2*i+1 <= len && a[i] < a[2*i+1]) maxPos = 2*i+1
-            if (2*i+2 <= len && a[maxPos] < a[2*i+2]) maxPos = 2*i+2
+            if (2*i+1 <= len && a[i] > a[2*i+1]) maxPos = 2*i+1
+            if (2*i+2 <= len && a[maxPos] > a[2*i+2]) maxPos = 2*i+2
             if (i === maxPos) break
 
             swap(a, i, maxPos);
@@ -45,21 +45,10 @@ class Heap {
         const a = this.heap;
         let newIdx = a.push(val) - 1;
 
-        while(this._getParentIdx(newIdx) >= 0 && a[newIdx] > a[this._getParentIdx(newIdx)]) {
+        while(this._getParentIdx(newIdx) >= 0 && a[newIdx] < a[this._getParentIdx(newIdx)]) {
             swap(a, newIdx, this._getParentIdx(newIdx));
             newIdx = this._getParentIdx(newIdx);
         }
-
-        return this;
-    }
-
-    remove0() {
-        const a = this.heap;
-        const lastIdx = a.length - 1;
-        [a[0], a[lastIdx]] = [a[lastIdx], a[0]];
-        a.pop();
-
-        this._heapify(0);
 
         return this;
     }
@@ -90,16 +79,4 @@ class Heap {
     }
 }
 
-;(() => {
-    const input = getRandomArr(50, 100);
-    const heap = new Heap(input);
-    heap.print();
-    heap.add(50).print();
-    heap.add(98).print();
-    heap.add(100).print();
-    heap.add(101).print();
-    heap.add(150).print();
-    heap.add(101).print();
-    // heap.remove0().print();
-    heap.sort().print();
-})()
+module.exports = Heap;

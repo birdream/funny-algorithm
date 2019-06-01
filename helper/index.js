@@ -16,3 +16,13 @@ inter.getRandomArr = (len = 10, max = 100) => {
 inter.swap = (arr, x, y) => {
     [arr[x], arr[y]] = [arr[y], arr[x]]
 }
+
+inter.it = (title, fn) => {
+    console.log('/////////////')
+    console.dir(title, { colors: true });
+    console.log('/////////////');
+    console.log(' ');
+    fn();
+    console.log(' ');
+    console.log(' ');
+}
