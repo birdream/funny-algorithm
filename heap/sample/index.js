@@ -1,6 +1,6 @@
-const BigHeap = require('./bigHeap');
-const SmallHeap = require('./smallHeap');
-const { getRandomArr, it } = require('../helper');
+const BigHeap = require('../bigHeap');
+const SmallHeap = require('../smallHeap');
+const { getRandomArr, it } = require('../../helper');
 
 ;(() => {
     it('should some BigHeap result', () => {
@@ -26,4 +26,8 @@ const { getRandomArr, it } = require('../helper');
         samllHeap.add(-1).print();
         samllHeap.sort().print();
     });
+
+    it('get middle number example', () => {
+
+    })
 })()

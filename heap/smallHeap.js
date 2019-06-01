@@ -1,12 +1,13 @@
 const { getRandomArr, swap } = require('../helper');
+const { getParIdx } = require('./util');
 
 class Heap {
     constructor(input = []) {
         // console.log('input: ', JSON.stringify(input))
         this.heap = input;
-        console.time('build heap');
+        // console.time('build heap');
         this._buildHeap();
-        console.timeEnd('build heap');
+        // console.timeEnd('build heap');
     }
 
     // compare the (non-leap node)'s left and right and itself
@@ -28,16 +29,12 @@ class Heap {
     // get the last first (non-leap node) parent the _heapify
     // and loop the second (non-leap node) untill the top father node
     _buildHeap() {
-        // let i = this._getParentIdx(this.heap.length - 1);
-        for (let i = this._getParentIdx(this.heap.length - 1); i >= 0; i--) {
+        // let i = getParIdx(this.heap.length - 1);
+        for (let i = getParIdx(this.heap.length - 1); i >= 0; i--) {
             this._heapify(i)
         }
 
         return this.heap
-    }
-
-    _getParentIdx(i) {
-        return Math.floor((i - 1)/2)
     }
 
     // add one and using it to it father to heap
@@ -45,9 +42,9 @@ class Heap {
         const a = this.heap;
         let newIdx = a.push(val) - 1;
 
-        while(this._getParentIdx(newIdx) >= 0 && a[newIdx] < a[this._getParentIdx(newIdx)]) {
-            swap(a, newIdx, this._getParentIdx(newIdx));
-            newIdx = this._getParentIdx(newIdx);
+        while(getParIdx(newIdx) >= 0 && a[newIdx] < a[getParIdx(newIdx)]) {
+            swap(a, newIdx, getParIdx(newIdx));
+            newIdx = getParIdx(newIdx);
         }
 
         return this;
@@ -58,13 +55,13 @@ class Heap {
     // because the last one is the originall max one
     sort() {
         let k = this.heap.length - 1;
-        console.time('sort')
+        // console.time('sort')
         while(k > 0) {
             swap(this.heap, k, 0);
             // k -= 1;
             this._heapify(0, --k);
         }
-        console.timeEnd('sort');
+        // console.timeEnd('sort');
 
         return this;
     }
