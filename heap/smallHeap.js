@@ -50,6 +50,11 @@ class Heap {
         return this;
     }
 
+    // TODO remove0 should be finish to get Top one
+    remove0() {
+
+    }
+
     // every time switch the first element to the last one and re-heap for the whole arr except the last one.
     // so k is the last index of the whole arr and -1 every time
     // because the last one is the originall max one

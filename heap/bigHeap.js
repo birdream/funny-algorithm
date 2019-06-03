@@ -50,6 +50,7 @@ class Heap {
         return this;
     }
 
+    // TODO remove0 should be finish to get Top one
     remove0() {
         const a = this.heap;
         const lastIdx = a.length - 1;
