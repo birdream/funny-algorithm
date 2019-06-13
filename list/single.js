@@ -18,6 +18,12 @@ class List {
         currNode.next = newNode;
     }
 
+    unshift(newEle) {
+        const newNode = new Node(newEle);
+        newNode.next = this.head;
+        this.head = newNode;
+    }
+
     push(newEle) {
         const newNode = new Node(newEle);
         let currNode = this.head;
@@ -56,7 +62,10 @@ class List {
     }
 
     remove(item) {
-
+        const preNode = this.findPrev(item)
+        if (preNode.next !== null) {
+            preNode.next = preNode.next.next
+        }
     }
 }
 

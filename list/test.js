@@ -11,7 +11,15 @@ it('Single List', () => {
     single.push('GG');
     single.push('HH');
     single.insert('NN', 'GG');
+    single.unshift('New Head');
+    single.push('XX');
+    single.unshift('New New');
 
+    single.display();
+
+    console.log('============');
+    single.remove('GG');
+    single.remove('XX');
     single.display();
 });
 
