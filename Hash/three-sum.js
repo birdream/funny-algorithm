@@ -38,8 +38,9 @@ function threeSum(target) {
 
 
 ;(() => {
-    console.log(threeSum([-1,0,1,2,4,5,7,-8,-7]));
+    console.log(threeSum([-1,0,1,2,4,5,5,7,-8,-7]));
     console.log(threeSum([0,0,0]));
     console.log(threeSum([0,0,0,0,0,0]));
     console.log(threeSum([0,0,0,0,0,1,-1]));
+    console.log(threeSum([-9, 9, 1]));
 })();

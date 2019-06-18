@@ -1,0 +1,22 @@
+{
+  "name": "funny-algorithm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/birdream/funny-algorithm.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/birdream/funny-algorithm/issues"
+  },
+  "homepage": "https://github.com/birdream/funny-algorithm#readme",
+  "dependencies": {
+    "binarysearchtree-js": "1.0.1"
+  }
+}
