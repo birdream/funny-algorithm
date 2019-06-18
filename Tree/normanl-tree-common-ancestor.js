@@ -6,7 +6,14 @@ const lowestCommonAncestor = (root, p, q) => {
     const left = lowestCommonAncestor(root.left, p, q);
     const right = lowestCommonAncestor(root.right, p, q);
 
-    return !left ? right : !right ? left : root;
+    if (!left) {
+        return right;
+    } else if (!right) {
+        return left;
+    } else {
+        return root;
+    }
+    // return !left ? right : !right ? left : root;
 }
 
 // for BST
