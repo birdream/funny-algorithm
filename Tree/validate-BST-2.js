@@ -1,9 +1,4 @@
-// recursion: validate(```, min, max) {
-//     max = validate(node.left);
-//     min = validate(node.right);
-//     max < root, min > root
-// }
-// O(n)
+
 
 const BinarySearchTree = require('binarysearchtree-js');
 
