@@ -25,4 +25,5 @@ const generateParenthesis = (n) => {
 ;(() => {
     console.log(generateParenthesis(3));
     console.log(generateParenthesis(4));
+    console.log(generateParenthesis(5));
 })()
