@@ -1,6 +1,6 @@
 class Node {
-    constructor(pre, val, next) {
-        this.pre = pre;
+    constructor(prev, val, next) {
+        this.prev = prev;
         this.val = val;
         this.next = next;
     }
@@ -22,10 +22,10 @@ class DoubleLink {
         } else {
             newNode.next = this.head;
 
-            this.head.pre = newNode;
+            this.head.prev = newNode;
             this.head = newNode;
 
-            this.head.pre = null;
+            this.head.prev = null;
         }
 
         this.length++
@@ -40,7 +40,7 @@ class DoubleLink {
             this.tail = newNode;
             this.head = newNode;
         } else {
-            newNode.pre = this.tail;
+            newNode.prev = this.tail;
             this.tail.next = newNode;
             this.tail = newNode;
 
@@ -62,8 +62,8 @@ class DoubleLink {
             return
         }
 
-        this.tail.pre.next = null;
-        this.tail = this.tail.pre;
+        this.tail.prev.next = null;
+        this.tail = this.tail.prev;
         this.length--;
     }
 
@@ -75,7 +75,7 @@ class DoubleLink {
             return
         }
 
-        this.head.pre = null;
+        this.head.prev = null;
         this.head = this.head.next;
         this.length--;
     }
@@ -104,13 +104,13 @@ class DoubleLink {
             return node;
         }
 
-        if (!node.pre) {
+        if (!node.prev) {
             this.deleteHead();
             return node;
         }
 
-        node.next.pre = node.pre;
-        node.pre.next = node.next;
+        node.next.prev = node.prev;
+        node.prev.next = node.next;
 
         this.length--;
 
