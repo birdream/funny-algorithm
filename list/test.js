@@ -21,5 +21,7 @@ it('Single List', () => {
     single.remove('GG');
     single.remove('XX');
     single.display();
+
+    console.log(single.find('GG'));
 });
 
