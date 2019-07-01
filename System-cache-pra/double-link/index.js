@@ -109,11 +109,11 @@ class DoubleLink {
             return node;
         }
 
-        this.node.next.pre = this.node.pre;
-        this.node.pre.next = this.node.next;
-
-        this.node = null;
+        node.next.pre = node.pre;
+        node.pre.next = node.next;
 
         this.length--;
+
+        return node
     }
 }
