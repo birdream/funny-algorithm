@@ -58,7 +58,7 @@ class DoubleLink {
         } else if (this.length === 1) {
             this.head = null;
             this.tail = null;
-
+            this.length--;
             return
         }
 
@@ -72,6 +72,7 @@ class DoubleLink {
         if (this.length === 1) {
             this.head = null;
             this.tail = null;
+            this.length--;
             return
         }
 
@@ -116,4 +117,33 @@ class DoubleLink {
 
         return node
     }
+
+    shift() {
+        return this.deleteTail();
+    }
+
+    pop() {
+        return this.deleteHead();
+    }
+
+    append(val) {
+        return this.addTail(val);
+    }
+
+    appendFront(val) {
+        return this.addHead(val)
+    }
+
+    print() {
+        let line = '';
+        let p = this.head;
+        while(p) {
+            line += `${p.val} => `
+            p = p.next
+        }
+
+        console.log(line)
+    }
 }
+
+module.exports = DoubleLink;
