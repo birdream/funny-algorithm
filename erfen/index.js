@@ -37,19 +37,31 @@ const sqrt1 = (x, jing) => {
 }
 
 ;(() => {
-    console.time('own')
-    console.log(sqrt(2000, 0.00000001));
-    console.timeEnd('own')
 
-    console.log();
-    console.time('own1')
-    console.log(sqrt1(2000, 0.00000001));
-    console.timeEnd('own1')
+    const test = (num, p) => {
+        console.log(`--------------${num}-----------`)
+        console.time('own')
+        console.log(sqrt(num, p));
+        console.timeEnd('own')
 
-    console.log();
-    console.time('origin')
-    console.log(Math.sqrt(2000));
-    console.timeEnd('origin')
+        console.log();
+        console.time('own1')
+        console.log(sqrt1(num, p));
+        console.timeEnd('own1')
+
+        console.log();
+        console.time('origin')
+        console.log(Math.sqrt(num));
+        console.timeEnd('origin')
+        console.log();
+    }
+
+    test(15000, 0.00000001);
+    test(2000, 0.00000001);
+    test(20000000, 0.00000001);
+    test(37, 0.00000001);
+    test(4, 0.00000001);
+    test(1008899, 0.00000001);
     // console.log(Number.EPSILON)
 
     // console.log(sqrt(2));
